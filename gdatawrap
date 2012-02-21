@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+
+import argparse
+import sys
+
+from csv2gdata import serve_content, motion_chart, line_chart
+from csvkit.table import Table
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Convert a CSV to the google charts data spec.')
+    parser.add_argument('--file', '-f', dest='file', type=argparse.FileType('r'),
+                        default=sys.stdin, help='Input gdata.')
+    parser.add_argument('--serve', '-s', dest='serve', action="store_true",
+                        default=False, help='Serve the chart locally using wsgiref') #TODO should probably just be a separate script
+    args = parser.parse_args()
+
+    data = args.file.read()
+
+    #wrapped_chart = motion_chart(data)
+    wrapped_chart = line_chart(data)
+
+    if args.serve:
+        serve_content(str(wrapped_chart))
+    else:
+        sys.stdout.write(wrapped_chart)

@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+
+import argparse
+import sys
+
+from csv2gdata import gdata_to_json, serve_content, motion_chart
+from csvkit.table import Table
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Convert a CSV to the google charts data spec.')
+    parser.add_argument('--file', '-f', dest='file', type=argparse.FileType('r'),
+                        default=sys.stdin, help='CSV to convert to gdata')
+    args = parser.parse_args()
+
+    table = Table.from_csv(args.file) 
+    json = gdata_to_json(table)
+    sys.stdout.write(json)
+    #serve_content(motion_chart(json))

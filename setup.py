@@ -13,9 +13,13 @@ setup(
     ],
     install_requires=[
         'csvkit >= 0.4.3',
+        'jinja2 >= 2.6',
     ],
     packages=[
-        'csvgdata',
+        'csv2gdata',
     ],
-    scripts=["csv2gdata"],
+    scripts=[
+        'csv2gdatatable',
+        'gdatawrap',
+    ],
 )
