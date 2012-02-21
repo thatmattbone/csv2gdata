@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+
+import sys
+
+from csvgdata import gdata_to_json, serve_content, motion_chart
+from csvkit.table import Table
+
+if __name__ == "__main__":
+    table = Table.from_csv(open(sys.argv[1]))    
+
+    json = gdata_to_json(table)
+    serve_content(motion_chart(json))
