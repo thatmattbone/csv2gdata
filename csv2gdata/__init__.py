@@ -16,7 +16,7 @@ def type_to_type_string(some_type):
         return "string"
     elif type(datetime.date.today()) == some_type:
         return "date"
-    elif type(datetime.date.now()) == some_type:
+    elif type(datetime.datetime.now()) == some_type:
         return "date"
 
 

@@ -3,5 +3,5 @@
 .DS_Store
 build
 dist
-
+csv2gdata.egg-info
 
