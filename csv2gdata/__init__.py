@@ -113,6 +113,84 @@ def line_chart(json, width=600, height=300, div_id="chart_div"):
     return template.render(json=json, width=width, height=height, div_id=div_id)
 
 
+def bar_chart(json, width=600, height=300, div_id="chart_div"):
+    template = jinja2.Template("""<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable({{json}});
+
+        var options = {
+          width: {{width}}, height: {{height}},
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('{{div_id}}'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="{{div_id}}"></div>
+  </body>
+</html>""")
+    return template.render(json=json, width=width, height=height, div_id=div_id)
+
+
+def scatter_chart(json, width=600, height=300, div_id="chart_div"):
+    template = jinja2.Template("""<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable({{json}});
+
+        var options = {
+          width: {{width}}, height: {{height}},
+        };
+
+        var chart = new google.visualization.ScatterChart(document.getElementById('{{div_id}}'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="{{div_id}}"></div>
+  </body>
+</html>""")
+    return template.render(json=json, width=width, height=height, div_id=div_id)
+
+
+def pie_chart(json, width=600, height=300, div_id="chart_div"):
+    template = jinja2.Template("""<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable({{json}});
+
+        var options = {
+          width: {{width}}, height: {{height}},
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('{{div_id}}'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="{{div_id}}"></div>
+  </body>
+</html>""")
+    return template.render(json=json, width=width, height=height, div_id=div_id)
+
+
 def serve_content(content, port=8000):
     from wsgiref.util import setup_testing_defaults
     from wsgiref.simple_server import make_server

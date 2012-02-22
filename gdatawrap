@@ -3,12 +3,15 @@
 import argparse
 import sys
 
-from csv2gdata import serve_content, motion_chart, line_chart
+from csv2gdata import serve_content, motion_chart, line_chart, bar_chart, scatter_chart
 from csvkit.table import Table
 
 CHART_TYPES = {
     'motion_chart': motion_chart,
-    'line_chart': line_chart
+    'line_chart': line_chart,
+    'bar_chart': bar_chart,
+    'scatter_chart': scatter_chart,
+    'pie_chart': pie_chart,
 }
  
 
