@@ -11,6 +11,9 @@ setup(
     dependency_links = [
         'http://google-visualization-python.googlecode.com/files/gviz_api_py-1.8.0.tar.gz#egg=gviz_api.py',
     ],
+    setup_requires=[
+        'gviz_api.py',
+    ],
     install_requires=[
         'csvkit >= 0.4.3',
         'jinja2 >= 2.6',
