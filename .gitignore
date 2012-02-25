@@ -4,4 +4,5 @@
 build
 dist
 csv2gdata.egg-info
-
+distribute*.egg
+distribute*.tar.gz

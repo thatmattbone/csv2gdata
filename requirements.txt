@@ -1,0 +1,3 @@
+csvkit >= 0.4.3
+jinja2 >= 2.6
+http://google-visualization-python.googlecode.com/files/gviz_api_py-1.8.0.tar.gz#egg=gviz_api.py
