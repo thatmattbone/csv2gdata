@@ -3,7 +3,7 @@
 import argparse
 import sys
 
-from csv2gdata import serve_content, motion_chart, line_chart, bar_chart, scatter_chart
+from csv2gdata import serve_content, motion_chart, line_chart, bar_chart, scatter_chart, pie_chart
 from csvkit.table import Table
 
 CHART_TYPES = {
