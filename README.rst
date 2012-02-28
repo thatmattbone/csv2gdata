@@ -99,5 +99,21 @@ just look at the bus and rail columns::
 
   curl http://data.cityofchicago.org/api/views/w8km-9pzd/rows.csv | csvcut -c year,bus,rail | csv2gdatatable | gdatawrap scatter_chart --serve
 
+Motion and pie chart examples coming soon...
+
+Why Would I Use This?
+=====================
+
+Maybe you don't want to.  If you're trying to load a CSV into google
+charts from some web service that is frequently updated, for example,
+then you most certainly want to use the `CSV Data Sources Protocol
+<http://code.google.com/apis/chart/interactive/docs/dev/implementing_data_source.html#csvdatatable>`_. But,
+if you're trying to take a quick peek at some data you have sitting
+around and maybe even share it with your friend over HTTP, this might
+be of use.  Or, if you just forget how to bootstrap google charts or
+generate the `data table JSON
+<http://code.google.com/apis/chart/interactive/docs/reference.html#dataparam>`_,
+you can take the generated data or HTML and hack away.
+
 
 
