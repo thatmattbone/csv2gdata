@@ -21,12 +21,16 @@ if __name__ == "__main__":
                         default=sys.stdin, help='Input gdata.')
     parser.add_argument('--serve', '-s', dest='serve', action="store_true",
                         default=False, help='Serve the chart locally using wsgiref') #TODO should probably just be a separate script
+    parser.add_argument('--height', dest='height', 
+                        default=300, help='Height of the chart.') 
+    parser.add_argument('--width', dest='width', 
+                        default=600, help='Width of the chart.') 
     parser.add_argument('chart', nargs=1, default="line_chart",
                         help="Chart type, one of: <{types}>".format(types="|".join(CHART_TYPES.keys())))
     args = parser.parse_args()
 
     data = args.file.read()
-    wrapped_chart = CHART_TYPES[args.chart[0]](data)
+    wrapped_chart = CHART_TYPES[args.chart[0]](data, height=args.height, width=args.width)
 
     if args.serve:
         serve_content(str(wrapped_chart))
