@@ -101,7 +101,7 @@ just look at the bus and rail columns::
 
 Motion and pie chart examples coming soon...
 
-Innclude the data table coming soon, too. This will optionally include the javascript g-charts table at the bottom.
+Include the data table coming soon, too. This will optionally include the javascript g-charts table at the bottom.
 
 Why Would I Use This?
 =====================
