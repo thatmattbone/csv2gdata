@@ -99,7 +99,11 @@ just look at the bus and rail columns::
 
   curl http://data.cityofchicago.org/api/views/w8km-9pzd/rows.csv | csvcut -c year,bus,rail | csv2gdatatable | gdatawrap scatter_chart --serve
 
-Motion and pie chart examples coming soon...
+For large time series data, the (flash based) timeline view can be useful. Here we look at per-day ridership information for the CTA::
+
+  curl https://data.cityofchicago.org/api/views/6iiy-9s97/rows.csv | csvcut -c service_date,bus,rail_boardings | head -n 2000 | csv2gdatatable | gdatawrap annotated_timeline --serve
+
+Again navigate to `localhost:8000 <http://localhost:8000>`_ and wait for the chart to render (which can take some time depending on the speed of your machine).
 
 Include the data table coming soon, too. This will optionally include the javascript g-charts table at the bottom.
 

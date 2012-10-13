@@ -191,6 +191,29 @@ def pie_chart(json, width=600, height=300, div_id="chart_div"):
     return template.render(json=json, width=width, height=height, div_id=div_id)
 
 
+def annotated_timeline(json, width=600, height=300, div_id="chart_div"):
+    template = jinja2.Template("""<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:['annotatedtimeline']});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable({{json}});
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('{{div_id}}'));
+        chart.draw(data, {displayAnnotations: true});
+
+      }
+    </script>
+  </head>
+  <body>
+    <div id="{{div_id}}" style='width: {{width}}px; height: {{height}}px;'></div>
+  </body>
+</html>""")
+    return template.render(json=json, width=width, height=height, div_id=div_id)    
+
+
 def serve_content(content, port=8000):
     from wsgiref.util import setup_testing_defaults
     from wsgiref.simple_server import make_server
@@ -207,5 +230,3 @@ def serve_content(content, port=8000):
 
     httpd = make_server('', port, simple_app)
     httpd.serve_forever()
-
-    

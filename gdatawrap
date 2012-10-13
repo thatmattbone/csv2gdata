@@ -3,8 +3,13 @@
 import argparse
 import sys
 
-from csv2gdata import serve_content, motion_chart, line_chart, bar_chart, scatter_chart, pie_chart
-from csvkit.table import Table
+from csv2gdata import (serve_content,
+                       motion_chart,
+                       line_chart,
+                       bar_chart,
+                       scatter_chart,
+                       pie_chart,
+                       annotated_timeline)
 
 CHART_TYPES = {
     'motion_chart': motion_chart,
@@ -12,19 +17,20 @@ CHART_TYPES = {
     'bar_chart': bar_chart,
     'scatter_chart': scatter_chart,
     'pie_chart': pie_chart,
+    'annotated_timeline': annotated_timeline,
 }
- 
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Convert a CSV to the google charts data spec.')
     parser.add_argument('--file', '-f', dest='file', type=argparse.FileType('r'),
                         default=sys.stdin, help='Input gdata.')
     parser.add_argument('--serve', '-s', dest='serve', action="store_true",
-                        default=False, help='Serve the chart locally using wsgiref') #TODO should probably just be a separate script
-    parser.add_argument('--height', dest='height', 
-                        default=300, help='Height of the chart.') 
-    parser.add_argument('--width', dest='width', 
-                        default=600, help='Width of the chart.') 
+                        default=False, help='Serve the chart locally using wsgiref')  # TODO should probably just be a separate script
+    parser.add_argument('--height', dest='height',
+                        default=300, help='Height of the chart.')
+    parser.add_argument('--width', dest='width',
+                        default=600, help='Width of the chart.')
     parser.add_argument('chart', nargs=1, default="line_chart",
                         help="Chart type, one of: <{types}>".format(types="|".join(CHART_TYPES.keys())))
     args = parser.parse_args()
