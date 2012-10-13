@@ -31,12 +31,14 @@ if __name__ == "__main__":
                         default=300, help='Height of the chart.')
     parser.add_argument('--width', dest='width',
                         default=600, help='Width of the chart.')
+    parser.add_argument('--render-table', dest='render_table',
+                        default=False, action="store_true", help='Render the data table.'),
     parser.add_argument('chart', nargs=1, default="line_chart",
                         help="Chart type, one of: <{types}>".format(types="|".join(CHART_TYPES.keys())))
     args = parser.parse_args()
 
     data = args.file.read()
-    wrapped_chart = CHART_TYPES[args.chart[0]](data, height=args.height, width=args.width)
+    wrapped_chart = CHART_TYPES[args.chart[0]](data, height=args.height, width=args.width, render_table=args.render_table)
 
     if args.serve:
         serve_content(str(wrapped_chart))

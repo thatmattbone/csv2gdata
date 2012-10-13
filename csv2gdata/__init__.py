@@ -65,34 +65,40 @@ def gdata_to_json(table):
 
 
 #TODO for all these we probably want to be able to return the big script tag with or without the surrounding html
-def motion_chart(json, width=600, height=300, div_id="chart_div"):
+def motion_chart(json, width=600, height=300, div_id="chart_div", render_table=False):
     template = jinja2.Template("""<html>
   <head>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-      google.load('visualization', '1', {'packages':['motionchart']});
+      google.load('visualization', '1', {'packages':['motionchart', 'table']});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = new google.visualization.DataTable({{json}}, 0.6);
         var chart = new google.visualization.MotionChart(document.getElementById('{{div_id}}'));
         chart.draw(data, {width: {{width}}, height: {{height}}});
+
+        {% if render_table %}
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+        table.draw(data, {showRowNumber: true});
+        {% endif %}        
       }
     </script>
   </head>
 
   <body>
     <div id="{{div_id}}" style="width: {{width}}px; height: {{height}}px;"></div>
+    <div id="table_div"></div>
   </body>
 </html>""")
-    return template.render(json=json, width=width, height=height, div_id=div_id)
+    return template.render(json=json, width=width, height=height, div_id=div_id, render_table=render_table)
 
 
-def line_chart(json, width=600, height=300, div_id="chart_div"):
+def line_chart(json, width=600, height=300, div_id="chart_div", render_table=False):
     template = jinja2.Template("""<html>
   <head>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
+      google.load("visualization", "1", {packages:["corechart", "table"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = new google.visualization.DataTable({{json}});
@@ -103,22 +109,29 @@ def line_chart(json, width=600, height=300, div_id="chart_div"):
 
         var chart = new google.visualization.LineChart(document.getElementById('{{div_id}}'));
         chart.draw(data, options);
+
+        {% if render_table %}
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+        table.draw(data, {showRowNumber: true});
+        {% endif %}
+
       }
     </script>
   </head>
   <body>
     <div id="{{div_id}}"></div>
+    <div id="table_div"></div>
   </body>
 </html>""")
-    return template.render(json=json, width=width, height=height, div_id=div_id)
+    return template.render(json=json, width=width, height=height, div_id=div_id, render_table=render_table)
 
 
-def bar_chart(json, width=600, height=300, div_id="chart_div"):
+def bar_chart(json, width=600, height=300, div_id="chart_div", render_table=False):
     template = jinja2.Template("""<html>
   <head>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
+      google.load("visualization", "1", {packages:["corechart", "table"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = new google.visualization.DataTable({{json}});
@@ -129,22 +142,28 @@ def bar_chart(json, width=600, height=300, div_id="chart_div"):
 
         var chart = new google.visualization.BarChart(document.getElementById('{{div_id}}'));
         chart.draw(data, options);
+
+        {% if render_table %}
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+        table.draw(data, {showRowNumber: true});
+        {% endif %}        
       }
     </script>
   </head>
   <body>
     <div id="{{div_id}}"></div>
+    <div id="table_div"></div>
   </body>
 </html>""")
-    return template.render(json=json, width=width, height=height, div_id=div_id)
+    return template.render(json=json, width=width, height=height, div_id=div_id, render_table=render_table)
 
 
-def scatter_chart(json, width=600, height=300, div_id="chart_div"):
+def scatter_chart(json, width=600, height=300, div_id="chart_div", render_table=False):
     template = jinja2.Template("""<html>
   <head>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
+      google.load("visualization", "1", {packages:["corechart", "table"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = new google.visualization.DataTable({{json}});
@@ -155,22 +174,28 @@ def scatter_chart(json, width=600, height=300, div_id="chart_div"):
 
         var chart = new google.visualization.ScatterChart(document.getElementById('{{div_id}}'));
         chart.draw(data, options);
+
+        {% if render_table %}
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+        table.draw(data, {showRowNumber: true});
+        {% endif %}        
       }
     </script>
   </head>
   <body>
     <div id="{{div_id}}"></div>
+    <div id="table_div"></div>
   </body>
 </html>""")
-    return template.render(json=json, width=width, height=height, div_id=div_id)
+    return template.render(json=json, width=width, height=height, div_id=div_id, render_table=render_table)
 
 
-def pie_chart(json, width=600, height=300, div_id="chart_div"):
+def pie_chart(json, width=600, height=300, div_id="chart_div", render_table=False):
     template = jinja2.Template("""<html>
   <head>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
+      google.load("visualization", "1", {packages:["corechart", "table"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = new google.visualization.DataTable({{json}});
@@ -181,22 +206,28 @@ def pie_chart(json, width=600, height=300, div_id="chart_div"):
 
         var chart = new google.visualization.PieChart(document.getElementById('{{div_id}}'));
         chart.draw(data, options);
+
+        {% if render_table %}
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+        table.draw(data, {showRowNumber: true});
+        {% endif %}
       }
     </script>
   </head>
   <body>
     <div id="{{div_id}}"></div>
+    <div id="table_div"></div>
   </body>
 </html>""")
-    return template.render(json=json, width=width, height=height, div_id=div_id)
+    return template.render(json=json, width=width, height=height, div_id=div_id, render_table=render_table)
 
 
-def annotated_timeline(json, width=600, height=300, div_id="chart_div"):
+def annotated_timeline(json, width=600, height=300, div_id="chart_div", render_table=False):
     template = jinja2.Template("""<html>
   <head>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-      google.load("visualization", "1", {packages:['annotatedtimeline']});
+      google.load("visualization", "1", {packages:['annotatedtimeline', 'table']});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = new google.visualization.DataTable({{json}});
@@ -204,14 +235,19 @@ def annotated_timeline(json, width=600, height=300, div_id="chart_div"):
         var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('{{div_id}}'));
         chart.draw(data, {displayAnnotations: true});
 
+        {% if render_table %}
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+        table.draw(data, {showRowNumber: true});
+        {% endif %}
       }
     </script>
   </head>
   <body>
     <div id="{{div_id}}" style='width: {{width}}px; height: {{height}}px;'></div>
+    <div id="table_div"></div>
   </body>
 </html>""")
-    return template.render(json=json, width=width, height=height, div_id=div_id)    
+    return template.render(json=json, width=width, height=height, div_id=div_id, render_table=render_table)
 
 
 def serve_content(content, port=8000):
